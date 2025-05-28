@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Community Event Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        nav { background: #0077cc; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        section { padding: 20px; }
+        footer { background: #f1f1f1; text-align: center; padding: 15px; margin-top: 20px; }
+
+        #welcomeBanner {
+            background-color: #cce5ff; padding: 15px; text-align: center;
+        }
+
+        .highlight { background: yellow; font-weight: bold; }
+
+        table { margin: auto; border-spacing: 10px; }
+        .eventImage { border: 3px solid #0077cc; width: 200px; height: 150px; border-radius: 8px; }
+
+        form { width: 90%; max-width: 500px; margin: auto; padding: 20px; border: 2px solid #ccc; border-radius: 10px; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #999; }
+        button, input[type="submit"] { margin-top: 15px; padding: 10px; background: #0077cc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+
+        .video-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f4f9ff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.video-wrapper {
+    max-width: 90%;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: 12px;
+}
+
+        .eventType{ font-family: Arial; padding: 30px; text-align: center; }
+        select, button { padding: 10px; margin: 10px; }
+
+        .preference-section {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Heading style */
+.preference-section h2 {
+    margin-bottom: 20px;
+    color: #0077cc;
+}
+
+/* Dropdown styling */
+.preference-section select {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+/* Paragraph message */
+#savedPref {
+    font-weight: bold;
+    color: green;
+    margin-top: 10px;
+}
+
+/* Button style */
+.preference-section button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.preference-section button:hover {
+    background-color: #005fa3;
+}
+
+
+.location-section {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #eef7ff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.location-section h2 {
+    color: #0077cc;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.location-section button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.location-section button:hover {
+    background-color: #005fa3;
+}
+
+#output {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #f9f9f9;
+    padding: 40px 20px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    border-top: 2px solid #0077cc;
+    border-bottom: 2px solid #0077cc;
+}
+
+.contact-section h2 {
+    color: #0077cc;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.contact-section a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #0077cc;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 60px;
+    height: 4px;
+    background-color: white;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.eventImage.enlarged {
+    transform: scale(1.5);
+    transition: transform 0.3s ease;
+    cursor: zoom-out;
+}
+.eventImage {
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#home">Community Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#video">Promo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#feedback">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- <nav>
+        <a href="#home">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#register">Register</a>
+        <a href="#location">Location</a>
+        <a href="#video">Promo</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home">
+        <div id="welcomeBanner">
+            Hello, <span class="highlight">Guest</span>! <br>
+            <span style="color: red; font-weight: bold;">Special Offer: 50% off your first event!</span>
+        </div>
+    </section> -->
+
+    <section id="gallery">
+        <table>
+        <caption>Past Community Events</caption>
+        <tr>
+            <td><img src="event1.jpg" alt="Music Night" title="Music Night" class="eventImage"></td>
+            <td><img src="event2.jpg" alt="Food Festival" title="Food Festival" class="eventImage"></td>
+            <td><img src="event3.jpg" alt="Marathon Run" title="Marathon Run" class="eventImage"></td>
+        </tr>
+        <tr>
+            <td><img src="event4.jpg" alt="Book Fair" title="Book Fair" class="eventImage"></td>
+            <td><img src="event5.jpg" alt="Art Exhibition" title="Art Exhibition" class="eventImage"></td>
+            <td><img src="event6.jpg" alt="Community Meetup" title="Community Meetup" class="eventImage"></td>
+        </tr>
+    </table>
+    </section>
+
+
+<div class="preference-section">
+ <label for="eventFee">Select Event Type</label>
+<select id="eventFee" onchange="showFee()">
+    <option value="">--Choose--</option>
+    <option value="Music - ₹500">Music</option>
+    <option value="Food - ₹300">Food</option>
+    <option value="Marathon - ₹200">Marathon</option>
+    <option value="Book Fair - ₹100">Book Fair</option>
+    <option value="Art Exhibition - ₹400">Art Exhibition</option>
+    <option value="Community Meetup - ₹0">Community Meetup</option>
+</select>
+<p id="feeDisplay" style="color: green; font-weight: bold;"></p>
+
+
+    <button onclick="clearPreferences()">Clear Preferences</button>
+</div>
+
+
+
+
+
+<div class="location-section">
+    <h2>Locate Nearest Events</h2>
+
+    <button onclick="getLocation()">Find Nearby Events</button>
+
+    <p id="output">Your location will appear here.</p>
+</div>
+
+   
+    <section id="register">
+        <form onsubmit="showConfirmation(event)">
+            <h3>Event Registration</h3>
+            <label>Name</label><input type="text" id="regName" required autofocus>
+            <label>Email</label><input type="email" required>
+            <label>Date</label><input type="date" required>
+            <label>Event Type</label>
+            <select id="eventSelect" onchange="savePreference()" required>
+                <option value="">--Choose--</option>
+                <option value="Music">Music</option>
+                <option value="Food">Food</option>
+                <option value="Marathon">Marathon</option>
+                  <option value="Book Fair">Book Fair</option>
+          <option value="Art Exhibition">Art Exhibition</option>
+           <option value="Community Meetup">Community Meetup</option>
+            </select>
+            <label>Message</label><textarea></textarea>
+            <input type="submit" value="Submit">
+            <output id="regMsg"></output>
+        </form>
+    </section>
+
+    
+
+<section id="video" class="video-section">
+    <h3> Promo Video</h3>
+
+  <video id="eventVideo" controls oncanplay="videoReady()">
+    <source src="sample.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <p id="videoMessage"></p>
+<p id="videoMessage">Enjoy the preview of our upcoming community event!</p>
+</section>
+
+
+
+    <section id="feedback">
+        <form>
+            <label>Phone</label><input type="tel" id="phone" onblur="validatePhone()">
+            <p id="phoneMsg" style="color:red"></p>
+            <label>Feedback</label><textarea id="feedbackBox" onkeydown="countChars()"></textarea>
+            <p id="charCount">Characters: 0</p>
+            <img src="poster.jpg" ondblclick="zoomImage(this)" class="eventImage" alt="Event Poster">
+            <!-- <label>Poster (Double-click to zoom)</label><br> -->
+            <!-- <img src="poster.jpg" ondblclick="zoomImage(this)" class="eventImage"> -->
+            <button type="button" onclick="submitFeedback()">Send Feedback</button>
+            <p id="submitMsg"></p>
+        </form>
+    </section>
+
+ 
+
+    <section id="contact" class="contact-section">
+    <h2> Contact Us</h2>
+    <p>If you have any questions, feel free to reach out to us!</p>
+    <p>Email: <a href="mailto:contact@community.org">contact@community.org</a></p>
+    <p>Phone: <a href="tel:+911234567890">+91 12345 67890</a></p>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 Local City Council | Designed with ❤️ by Narayan Mahato</p>
+</footer>
+
+    <script>
+
+function zoomImage(img) {
+    img.classList.toggle("enlarged");
+}
+
+
+
+        function clearPreferences() {
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Clear both dropdowns if present
+    const eventSelect = document.getElementById("eventSelect");
+    const eventFee = document.getElementById("eventFee");
+
+    if (eventSelect) eventSelect.value = "";
+    if (eventFee) {
+        eventFee.value = "";
+        document.getElementById("feeDisplay").innerText = "";
+    }
+
+    const savedPref = document.getElementById("savedPref");
+    if (savedPref) savedPref.innerText = "Preferences cleared.";
+
+    alert("Preferences cleared.");
+}
+
+
+
+        function showFee() {
+    const fee = document.getElementById("eventFee").value;
+    document.getElementById("feeDisplay").innerText = fee ? `Selected: ${fee}` : "";
+}
+       // Function to get user's location
+        function getLocation() {
+        if (!navigator.geolocation) {
+            document.getElementById("output").innerText = "❌ Geolocation not supported.";
+            return;
+        }
+
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        };
+
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const coords = pos.coords;
+                document.getElementById("output").innerText = 
+                    `✅ Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`;
+            },
+            (err) => {
+                document.getElementById("output").innerText = `❌ Error: ${err.message}`;
+            },
+            options
+        );
+    }
+
+function savePreference() {
+            const selected = document.getElementById("eventType").value;
+            localStorage.setItem("preferredEvent", selected);
+            sessionStorage.setItem("tempEvent", selected);
+            document.getElementById("savedPref").innerText = "Saved: " + selected;
+        }
+
+        function clearPreferences() {
+            localStorage.clear();
+            sessionStorage.clear();
+            document.getElementById("savedPref").innerText = "Preferences cleared.";
+            document.getElementById("eventType").value = "";
+        }
+
+        // Load saved preference
+        window.onload = function() {
+            const saved = localStorage.getItem("preferredEvent");
+            if (saved) {
+                document.getElementById("eventType").value = saved;
+                document.getElementById("savedPref").innerText = "Welcome back! Preferred event: " + saved;
+            }
+        };
+
+
+
+
+
+        function showConfirmation(e) {
+            e.preventDefault();
+            document.getElementById("regMsg").innerText = "✅ Registered successfully!";
+        }
+
+        function validatePhone() {
+            const phone = document.getElementById("phone").value;
+            const valid = /^[6-9]\d{9}$/.test(phone);
+            document.getElementById("phoneMsg").innerText = valid ? "" : "Invalid phone number";
+        }
+
+        function countChars() {
+            const len = document.getElementById("feedbackBox").value.length;
+            document.getElementById("charCount").innerText = "Characters: " + len;
+        }
+
+        function zoomImage(img) {
+            img.classList.toggle("enlarged");
+        }
+
+        function submitFeedback() {
+            document.getElementById("submitMsg").innerText = "✅ Feedback submitted!";
+        }
+
+        function videoReady() {
+            document.getElementById("videoMessage").innerText = "🎬 Video is ready to play!";
+        }
+
+        window.onbeforeunload = function () {
+            const name = document.getElementById("regName").value;
+            if (!name) return "You haven't completed the form. Leave anyway?";
+        }
+
+        function savePreference() {
+            const selected = document.getElementById("eventSelect").value;
+            localStorage.setItem("preferredEvent", selected);
+        }
+
+        function clearPreferences() {
+            localStorage.clear();
+            alert("Preferences cleared.");
+        }
+
+        window.onload = function () {
+            const saved = localStorage.getItem("preferredEvent");
+            if (saved) document.getElementById("eventSelect").value = saved;
+        }
+
+       
+    </script>
+
+     <script src="app.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
